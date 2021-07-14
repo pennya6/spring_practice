@@ -41,3 +41,19 @@ Spring에서 제공하는 IoC/DI 컨테이너
 3. BeanPostProcessor :  컨테이너의 기본로직을 오버라이딩한다. 인스턴스화 와 의존성 처리 로직 등을 개발자가
                         원하는 대로 구현할 수 있게 한다.
                        
+Bean : Spring 컨테이너가 관리하는 객체
+
+Spring은 빈을 생성할때 기본적으로 싱글톤(Singleton)객체로 생성한다. 이는 메모리에 하나만 생성한다는 의미이다.
+만약 여러개를 사용하고 싶다면 
+<bean id="e" class="kr.or.connect.diexam01.Engine"></bean>
+	<bean id="c" class="kr.or.connect.diexam01.Car">
+		<property name="engine" ref="e"></property>
+	</bean>
+  이런식으로 한다. 즉 bean의 scope를 prototype으로 변경한다.
+  
+  
+class UserBean의 특징
+	  1) 기본 생성자를 가지고 있다.
+	  2) 필드는 private하게 선언한다.
+	  3) getter, setter 메소드를 가진다. getName() setName() 메소드를 프로피티(property)라고 한다.
+	
