@@ -1,0 +1,50 @@
+Spring JDBC
+:JDBC 프로그래밍시 반복되는 개방요소들을 스프링 프레임워크가 처리해줌
+
+Spring이 동작해주는 부분
+-연결오픈
+-스테이트먼트 준비와 실행
+-결과를 반복하는 루프설정
+-모든 예외처리
+-트랙잭션제어
+-연결, 스테이트먼트, 리절트셋 닫기
+
+Spring JDBC 패키지
+1. org.springframework.jdbc.core -> JdbcTemplate 및 관련 Helper 객체 제공
+2. org.springframework.jdbc.datasource -> DataSource를 쉽게 접근하기 위한 유틸 클래스, 트랜젝션매니져 및 다양한 DataSource 구현을 제공
+3. rg.springframework.jdbc.object -> RDBMS 조회, 갱신, 저장등을 안전하고 재사용 가능한 객제 제공
+4. org.springframework.jdbc.support -> jdbc.core 및 jdbc.object를 사용하는 JDBC 프레임워크를 지원
+
+                   +JDBC Template
+                    :org.springframework.jdbc.core에서 가장 중요한 클래스이다.
+                    리소스 생성, 해지를 처리해서 연결을 닫는 것을 잊어 발생하는 문제를 해결
+                    스테이먼트의 생성과 실행을 처리
+                    SQL조회, 업데이트, 저장 프로시서 호출, resultset 반복호출 실행
+    
+    
+DTO(Data Transfer Object) : 계층간 데이터 교환을 위한 자바빈즈
+                            계층은 컨트롤러 뷰, 비즈니스 계층, 퍼시스턴트 계층을 의미
+                            DTO는 로직을 가지고 있지 않고 순수한 데이터 객체
+                            DB에서 데이터를 얻어 Service나 controller등으로 부터 보낼때 사용하는 객체
+                            필드와 getter, setter,toString(),equals(),hashCode() 오버라이딩 가능
+                            
+                            
+                            vs VO(Value Object) : DTO와 동일한 개념이지만 read only 속성을 갖는다
+                                                  VO는 특정한 비즈니스 값을 답는 객체이고 
+                                                  DTO는 Layer간의 통신 용도로 오고가는 객체이다.
+                            
+                            
+DAO(Data Access Object) : 데이터를 조회하거나 조작하는 기능을 전담하는 객체
+                          데이터베이스를 조작하는 기능을 전담하는 목적
+                          실제로 DB에 접근하는 객체
+                          SerVice와 DB를 연결하는 고리 역할
+                          SQL를 사용하여 DB에 접근한후 적절한 CRUD API를 제공함
+                          
+                          
+                          
+ConnectionPool : 미리 커넥션을 여러개 맺어둔다.
+                 커넥션이 필요하면 커넥션 풀에게 빌려서 사용한 뒤 반납한다.
+                 
+                 
+DataSource : 커넥션 풀을 관리하는 목적으로 사용되는 객체
+             DataSource를 이용해 커넥션을 얻어오고 반납하는 작업을 수행한다.
