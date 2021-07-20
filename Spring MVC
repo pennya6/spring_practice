@@ -18,9 +18,34 @@ MVC Model 2 - 웹브라우저 사용자의 요청을 서블릿이 받음
               
               
 Spring MVC - 모델 2 아키텍처로 구성
+
              Dispatcher Servlet - Http 프로토콜을 통해 들어오는 모든 요청을 프레젠테이션 계층의 제일 앞에 둬서 
-             중앙 집중식으로 처리해주는 프로트 컨트롤러
-             Handler Mapping
+                                  중앙 집중식으로 처리해주는 프로트 컨트롤러
+                                  web.xml의 역할을 상당히 축소시켜주었음, 즉 dispatcher-sevlet이 해당 어플리케이션으로 
+                                  들어오는 모든 요청을 핸들링해주고 공통작업을 처리한다.
+                                  
+                                  <dispatcher servlet 내부동작흐름>
+                                  1. 요청
+                                  2. 요청 선처리 작업
+                                                    <요청 선처리 작업 흐름>
+                                                    2-1. 요청
+                                                    2-2. Local결정
+                                                    2-3. RequestContextHolder에 요청 저장
+                                                    2-4. FlashMap 복원
+                                                    2-5. 멀티파트요청 o ->MultipartResolver가 멀티파트 결정
+                                                         멀티파트요청 x ->핸들러 결정과 실행
+                                                    
+                                  3. HandlerExecutionChain 결정
+                                  4. HandlerExecutionChain 실행
+                                  5. 예외0 -> 예외처리
+                                     예외x -> 뷰렌더링 -> 요청처리종료 
+                                                                 
+                                                                   
+                                  
+             
+             Handler Mapping - dispatcher servlet으로 들어온 모든 요청을 각각의 controller로 위임처리를 하는 
+                               handler mapping
              Handler Adaper
+             ViewResolver
 
                 
